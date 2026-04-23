@@ -17,7 +17,6 @@ public class Utilities {
 
             } catch (InputMismatchException e) {
                 System.out.println("잘못된 입력입니다. 숫자만 입력해주세요.");
-                sc.next();
             }
         }
         return menunum;
@@ -31,9 +30,8 @@ public class Utilities {
                 tempcoin = sc.nextInt();
                 break;
 
-            } catch (InputMismatchException e) { // 에러가 발생하면 이쪽으로 빠짐
+            } catch (InputMismatchException e) {
                 System.out.println("잘못된 입력입니다. 숫자만 입력해주세요.");
-                sc.next();
             }
         }
         return tempcoin;
