@@ -35,7 +35,7 @@ public class VendingMain {
                     memberDto = userView.login();
                     if (memberDto.getIsAdmin() == 1) {
                         System.out.println("관리자 모드로 진입하시겠습니까? 1.네 2.아니오");
-                        ans2 = utilities.chooseMenu();
+                        ans2 = utilities.chooseMenu(2);
                         if (ans2 == 1) {
                             AdminView.menu();
                         } else {
