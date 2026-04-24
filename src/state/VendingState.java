@@ -51,50 +51,39 @@ public class VendingState {
         return psmt;
     }
 
-    public void insertData(DrinkDto dto) {
+    public int insertData(DrinkDto dto) {
+        int result = 0;
         try {
             PreparedStatement psmt = psmtmaker(dto, drinkInsert);
-            int result = psmt.executeUpdate();
-            if (result == 0) {
-                System.out.println(dto.getName() + "저장에 실패하였습니다.");
-            } else {
-                System.out.println("저장 성공");
-            }
+            result = psmt.executeUpdate();
             psmt.close();
         } catch (Exception e) {
             System.out.println("INSERT 오류 : " + e.getMessage());
         };
+        return result;
     }
 
-    public void insertData(MemberDto dto) {
+    public int insertData(MemberDto dto) {
+        int result = 0;
         try {
             PreparedStatement psmt = psmtmaker(dto, memberInsert);
-            int result = psmt.executeUpdate();
-            if (result == 0) {
-                System.out.println(dto.getName() + "저장에 실패하였습니다.");
-            } else {
-                System.out.println("저장 성공");
-            }
+            result = psmt.executeUpdate();
             psmt.close();
         } catch (Exception e) {
             System.out.println("INSERT 오류 : " + e.getMessage());
         };
+        return result;
     }
 
-    public void insertData(SalesDto dto) {
+    public int insertData(SalesDto dto) {
+        int result = 0;
         try {
             PreparedStatement psmt = psmtmaker(dto, salesInsert);
-            int result = psmt.executeUpdate();
-            if (result == 0) {
-                System.out.println("저장에 실패하였습니다.");
-            } else {
-                System.out.println("저장 성공");
-            }
+            result = psmt.executeUpdate();
             psmt.close();
         } catch (Exception e) {
             System.out.println("INSERT 오류 : " + e.getMessage());
         };
+        return result;
     }
-
-
 }
