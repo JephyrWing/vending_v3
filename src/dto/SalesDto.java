@@ -42,7 +42,6 @@ public class SalesDto {
         return price;
     }
 
-
     public String getSoldAt() {
         return sold_at;
     }
