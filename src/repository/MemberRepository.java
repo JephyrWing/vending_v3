@@ -9,7 +9,7 @@ public interface MemberRepository {
 
     public int register(MemberInfoDto dto);
 
-    public int login(String userId, String pw);
+    public MemberDto login(String userId, String pw);
 
     public List<MemberDto> findAll();
 
