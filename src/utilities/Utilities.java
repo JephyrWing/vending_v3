@@ -1,21 +1,23 @@
 package utilities;
 
 import java.time.LocalDateTime;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Utilities {
     Scanner sc = new Scanner(System.in);
 
-    public int chooseMenu() {
+    public int chooseMenu(int count) {
         int menunum = 0;
         while (true) {
             try {
                 System.out.println("\n번호를 골라주세요.");
                 menunum = sc.nextInt();
-                break;
-
-            } catch (InputMismatchException e) {
+                if (menunum > count || menunum <= 0) {
+                    System.out.println("올바른 번호를 골라주세요.");
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
                 System.out.println("잘못된 입력입니다. 숫자만 입력해주세요.");
             }
         }
@@ -26,11 +28,14 @@ public class Utilities {
         int tempcoin = 0;
         while (true) {
             try {
-                System.out.println("\n금액을 투입해주세요.");
+                System.out.println("\n충전할 금액을 입력해주세요.(천원 단위로만 충전 가능합니다.)");
                 tempcoin = sc.nextInt();
-                break;
-
-            } catch (InputMismatchException e) {
+                if (tempcoin <= 0 || (tempcoin % 1000) != 0) {
+                    System.out.println("올바른 금액을 입력해주세요");
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
                 System.out.println("잘못된 입력입니다. 숫자만 입력해주세요.");
             }
         }
@@ -44,7 +49,7 @@ public class Utilities {
         int curhour = LocalDateTime.now().getHour();
         int curmin = LocalDateTime.now().getMinute();
         int cursec = LocalDateTime.now().getSecond();
-        return String.format("%d/%d/%d %d:%d:%d", curyear, curmonth, curday, curhour, curmin, cursec);
+        return String.format("%d-%d-%d %d:%d:%d", curyear, curmonth, curday, curhour, curmin, cursec);
     }
 
     public void creLine() {
