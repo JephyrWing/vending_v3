@@ -1,6 +1,6 @@
 package service;
 
-import dto.MemberDto;
+import state.MemberDto;
 import repository.MemberRepository;
 
 import java.util.List;
@@ -18,8 +18,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberDto login(String userId, String pw) {
-        return null;
+    public int[] login(String userId, String pw) {
+        int[] result = null;
+        List<MemberDto> list = repository.login(userId, pw);
+        if (!list.isEmpty()) {
+            result = new int[] {list.get(0).getId(), list.get(0).getIsAdmin()};
+        }
+
+        return result;
     }
 
     @Override

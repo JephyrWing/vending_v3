@@ -1,6 +1,6 @@
 package repository;
 
-import dto.SalesDto;
+import state.SalesDto;
 import state.VendingState;
 import java.util.List;
 

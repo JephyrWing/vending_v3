@@ -1,4 +1,4 @@
-package dto;
+package state;
 
 public class SalesDto {
     private int id;
@@ -29,21 +29,40 @@ public class SalesDto {
     public int getId() {
         return id;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getMemberId() {
         return member_id;
+    }
+
+    public void setMember_id(int member_id) {
+        this.member_id = member_id;
     }
 
     public int getMenuId() {
         return menu_id;
     }
 
+    public void setMenu_id(int menu_id) {
+        this.menu_id = menu_id;
+    }
+
     public int getPrice() {
         return price;
     }
 
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public String getSoldAt() {
         return sold_at;
+    }
+
+    public void setSold_at(String sold_at) {
+        this.sold_at = sold_at;
     }
 
 }

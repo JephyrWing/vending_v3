@@ -1,4 +1,4 @@
-package dto;
+package state;
 
 public class MemberInfoDto {
     private int id;
@@ -39,40 +39,72 @@ public class MemberInfoDto {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
     public String getUserId() {
         return user_id;
     }
 
+    public void setUserId(String user_id) {
+        this.user_id = user_id;
+    }
+
+
     public int getIsAdmin() {
         return isadmin;
     }
+
     public void setIsAdmin(int isadmin) {
         this.isadmin = isadmin;
     }
 
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
 
     public int getBalance() {
         return balance;
     }
 
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+
     public void setPassword(String password) {
         this.password = password;
     }
 
+
     public String getTel() {
         return tel;
     }
+
     public void setTel(String tel) {
         this.tel = tel;
     }
 
-    public void setCard_num(String card_num) {
+
+    public void setCardNum(String card_num) {
         this.card_num = card_num;
     }
+
+    protected boolean passCompare(String pass) {
+        boolean result = false;
+        if (pass == password) {
+            result = true;
+        }
+        return result;
+    }
 }
+
+

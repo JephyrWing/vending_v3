@@ -1,4 +1,4 @@
-package dto;
+package state;
 
 public class DrinkDto {
     private int id;
@@ -25,6 +25,9 @@ public class DrinkDto {
 
     public int getId() {
         return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

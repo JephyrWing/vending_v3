@@ -1,11 +1,11 @@
 package state;
 
-import dto.DrinkDto;
-import dto.MemberDto;
-import dto.SalesDto;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class VendingState {
     private final Connection conn;
@@ -84,6 +84,90 @@ public class VendingState {
         } catch (Exception e) {
             System.out.println("INSERT 오류 : " + e.getMessage());
         };
+        return result;
+    }
+
+    public List<MemberInfoDto> selectMemberInfo() {
+        List<MemberInfoDto> dtoList = new ArrayList<>();
+        // 쿼리 실행 도구
+        PreparedStatement psmt = null;
+        // 검색 결과 레코드 셋을 담을 통
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT * FROM member";
+            psmt = conn.prepareStatement(sql);
+            // 실행 0> 결과는 rs가 받는다
+            rs = psmt.executeQuery();
+            // 받은 결과를 DTO list에 차곡차곡 담는다.
+            while (rs.next()) {
+                MemberInfoDto dto = new MemberInfoDto();
+                dto.setId(rs.getInt("id"));
+                dto.setUserId(rs.getString("user_id"));
+                dto.setPassword(rs.getString("password"));
+                dto.setName(rs.getString("name"));
+                dto.setTel(rs.getString("tel"));
+                dto.setBalance(rs.getInt("balance"));
+                dto.setCardNum(rs.getString("card_num"));
+                dto.setIsAdmin(rs.getInt("is_admin"));
+                dtoList.add(dto);
+            }
+            psmt.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("Find All Error : " + e.getMessage());
+        }
+        return dtoList;
+    }
+    public List<MemberDto> selectMember() {
+        List<MemberDto> dtoList = new ArrayList<>();
+        // 쿼리 실행 도구
+        PreparedStatement psmt = null;
+        // 검색 결과 레코드 셋을 담을 통
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT * FROM member";
+            psmt = conn.prepareStatement(sql);
+            // 실행 0> 결과는 rs가 받는다
+            rs = psmt.executeQuery();
+            // 받은 결과를 DTO list에 차곡차곡 담는다.
+            while (rs.next()) {
+                MemberDto dto = new MemberDto();
+                dto.setId(rs.getInt("id"));
+                dto.setUserId(rs.getString("user_id"));
+                dto.setName(rs.getString("name"));
+                dto.setIsAdmin(rs.getInt("is_admin"));
+                dtoList.add(dto);
+            }
+            psmt.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("Find All Error : " + e.getMessage());
+        }
+        return dtoList;
+    }
+
+    public List<MemberDto> login(String user_id, String pass) {
+        List<MemberInfoDto> list = selectMemberInfo();
+        List<MemberDto> list2 = selectMember();
+        List<MemberDto> result = new ArrayList<>();
+        MemberInfoDto dto;
+        MemberDto dto2;
+
+        for (MemberInfoDto i : list) {
+            if (i.getUserId() == user_id) {
+                dto = i;
+                if (dto.passCompare(pass)) {
+                    for (MemberDto j : list2) {
+                        if (i.getUserId() == user_id) {
+                            dto2 = j;
+                            result.add(dto2);
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
         return result;
     }
 }

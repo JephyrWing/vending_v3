@@ -1,6 +1,5 @@
 package view;
 
-import dto.MemberDto;
 import service.DrinkService;
 import service.MemberService;
 import service.SalesService;
@@ -85,6 +84,10 @@ public class UserView {
     }
 
     public int[] login() {
-        return null;
+        System.out.println("ID를 입력해주세요");
+        String user_id = sc.next();
+        System.out.println("비밀번호를 입력해주세요.");
+        String pass = sc.next();
+        return memberServ.login(user_id, pass);
     }
 }
