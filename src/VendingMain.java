@@ -30,7 +30,7 @@ public class VendingMain {
         while (true) {
             ans = userView.start();
             switch (ans) {
-                case 1 -> userView.signup();
+                case 1 -> userView.register();
                 case 2 -> {
                     memberDto = userView.login();
                     if (memberDto.getIsAdmin() == 1) {

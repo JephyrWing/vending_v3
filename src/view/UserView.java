@@ -23,7 +23,7 @@ public class UserView {
         return 0;
     }
 
-    public void signup() {
+    public void register() {
     }
 
     public MemberDto login() {
