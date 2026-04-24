@@ -13,7 +13,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public int register(String userid, String password, String name, String tel, String cardnum, int isadmin) {
+    public int register(String userid, String password, String name, String tel, String cardnum) {
         return 0;
     }
 
@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public int update(String userid, String password, String name, String tel, String cardnum, int isadmin) {
+    public int update(String userid, String password, String name, String tel, String cardnum) {
         return 0;
     }
 
@@ -40,5 +40,25 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int charge(int memberId, int amount) {
         return 0;
+    }
+
+    @Override
+    public boolean checkUserId(String user_id) {
+        return false;
+    }
+
+    @Override
+    public boolean checkPass(String pass, String passConfirm) {
+        return false;
+    }
+
+    @Override
+    public boolean checkTel(String tel) {
+        return false;
+    }
+
+    @Override
+    public boolean checkCard(String cardNum) {
+        return false;
     }
 }

@@ -55,4 +55,23 @@ public class Utilities {
     public void creLine() {
         System.out.println("=========================================================================================================");
     }
+
+    public boolean Luhn_Validation(String cardnum) {
+        int total = 0;
+        for (int i = 0; i < cardnum.length(); i += 2) {
+            int j = Integer.parseInt(Character.toString(cardnum.charAt(i)));
+            if (j * 2 > 9) {
+                total += (j * 2 - 9);
+            } else {
+                total += j;
+            }
+        }
+
+        boolean result = false;
+        if (total % 10 == 0) {
+            result = true;
+        }
+
+        return result;
+    }
 }

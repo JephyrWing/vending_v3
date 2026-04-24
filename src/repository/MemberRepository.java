@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface MemberRepository {
 
-    public int register(MemberInfoDto dto);
+    int register(MemberInfoDto dto);
 
-    public MemberDto login(String userId, String pw);
+    MemberDto login(String userId, String pw);
 
-    public List<MemberDto> findAll();
+    List<MemberDto> findAll();
 
-    public int update(MemberInfoDto dto);
+    int update(MemberInfoDto dto);
 
-    public int delete(int id);
+    int delete(int id);
 
-    public int charge(int memberId, int amount);
+    int charge(int memberId, int amount);
 }

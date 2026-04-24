@@ -8,12 +8,14 @@ import view.AdminView;
 import view.UserView;
 
 import java.sql.Connection;
+import java.util.Scanner;
 
 public class VendingMain {
     public static Utilities utilities = new Utilities();
 
     public static void main(String[] args) {
         Connection conn = DBConnect.getConnection();
+        Scanner sc = new Scanner(System.in);
         VendingState state = new VendingState(conn);
         DrinkRepository drinkRepo = new DrinkRepositoryImpl(state);
         MemberRepository memberRepo = new MemberRepositoryImpl(state);
@@ -26,6 +28,11 @@ public class VendingMain {
 
         int ans = 0;
         int ans2 = 0;
+
+        String test1 = sc.next();
+        boolean test2 = utilities.Luhn_Validation(test1);
+        System.out.println(test2);
+
         MemberDto memberDto = null;
         while (true) {
             ans = userView.start();
