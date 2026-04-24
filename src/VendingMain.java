@@ -2,6 +2,7 @@ import db.DBConnect;
 import dto.MemberDto;
 import repository.*;
 import service.*;
+import state.VendingState;
 import utilities.Utilities;
 import view.AdminView;
 import view.UserView;
@@ -13,9 +14,10 @@ public class VendingMain {
 
     public static void main(String[] args) {
         Connection conn = DBConnect.getConnection();
-        DrinkRepository drinkRepo = new DrinkRepositoryImpl(conn);
-        MemberRepository memberRepo = new MemberRepositoryImpl(conn);
-        SalesRepository salesRepo = new SalesRepositoryImpl(conn);
+        VendingState state = new VendingState(conn);
+        DrinkRepository drinkRepo = new DrinkRepositoryImpl(state);
+        MemberRepository memberRepo = new MemberRepositoryImpl(state);
+        SalesRepository salesRepo = new SalesRepositoryImpl(state);
         DrinkService drinkServ = new DrinkServiceImpl(drinkRepo);
         MemberService memberServ = new MemberServiceImpl(memberRepo);
         SalesService salesServ = new SalesServiceImpl(salesRepo);

@@ -1,11 +1,13 @@
 package repository;
 
+import state.VendingState;
+
 import java.sql.Connection;
 
 public class DrinkRepositoryImpl implements DrinkRepository{
-    private final Connection conn;
+    private final VendingState state;
 
-    public DrinkRepositoryImpl(Connection conn) {
-        this.conn = conn;
+    public DrinkRepositoryImpl(VendingState state) {
+        this.state = state;
     }
 }

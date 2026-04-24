@@ -1,11 +1,13 @@
 package repository;
 
+import state.VendingState;
+
 import java.sql.Connection;
 
 public class SalesRepositoryImpl implements SalesRepository{
-    private final Connection conn;
+    private final VendingState state;
 
-    public SalesRepositoryImpl(Connection conn) {
-        this.conn = conn;
+    public SalesRepositoryImpl(VendingState state) {
+        this.state = state;
     }
 }
