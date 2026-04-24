@@ -6,7 +6,6 @@ import dto.SalesDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.List;
 
 public class VendingState {
     private final Connection conn;
@@ -17,7 +16,9 @@ public class VendingState {
     public VendingState(Connection conn) {
         this.conn = conn;
     }
-    
+
+
+    //메서드
     public PreparedStatement psmtmaker(DrinkDto dto, String sql) throws Exception {
         PreparedStatement psmt = null;
         psmt = conn.prepareStatement(sql);
@@ -50,23 +51,50 @@ public class VendingState {
         return psmt;
     }
 
-    public void insertData(List<DrinkDto> list) {
-        list.forEach(x -> {
-            try {
-                PreparedStatement psmt = psmtmaker(x, drinkInsert);
-                int result = psmt.executeUpdate();
-                if (result == 0) {
-                    System.out.println(x.getName() + "저장에 실패하였습니다.");
-                } else {
-                    System.out.println("저장 성공");
-                }
-                psmt.close();
-            } catch (Exception e) {
-                System.out.println("INSERT 오류 : " + e.getMessage());
+    public void insertData(DrinkDto dto) {
+        try {
+            PreparedStatement psmt = psmtmaker(dto, drinkInsert);
+            int result = psmt.executeUpdate();
+            if (result == 0) {
+                System.out.println(dto.getName() + "저장에 실패하였습니다.");
+            } else {
+                System.out.println("저장 성공");
             }
-        });
+            psmt.close();
+        } catch (Exception e) {
+            System.out.println("INSERT 오류 : " + e.getMessage());
+        };
     }
 
+    public void insertData(MemberDto dto) {
+        try {
+            PreparedStatement psmt = psmtmaker(dto, memberInsert);
+            int result = psmt.executeUpdate();
+            if (result == 0) {
+                System.out.println(dto.getName() + "저장에 실패하였습니다.");
+            } else {
+                System.out.println("저장 성공");
+            }
+            psmt.close();
+        } catch (Exception e) {
+            System.out.println("INSERT 오류 : " + e.getMessage());
+        };
+    }
+
+    public void insertData(SalesDto dto) {
+        try {
+            PreparedStatement psmt = psmtmaker(dto, salesInsert);
+            int result = psmt.executeUpdate();
+            if (result == 0) {
+                System.out.println("저장에 실패하였습니다.");
+            } else {
+                System.out.println("저장 성공");
+            }
+            psmt.close();
+        } catch (Exception e) {
+            System.out.println("INSERT 오류 : " + e.getMessage());
+        };
+    }
 
 
 }

@@ -33,7 +33,7 @@ public class VendingMain {
                 case 1 -> userView.signup();
                 case 2 -> {
                     memberDto = userView.login();
-                    if (memberDto.isadmin()) {
+                    if (memberDto.getIsAdmin() == 1) {
                         System.out.println("관리자 모드로 진입하시겠습니까? 1.네 2.아니오");
                         ans2 = utilities.chooseMenu();
                         if (ans2 == 1) {
