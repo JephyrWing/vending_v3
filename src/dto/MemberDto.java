@@ -7,20 +7,20 @@ public class MemberDto {
     private String name;
     private int balance;
 
-    public MemberDto(int id, String user_id, int isadmin, String name, int balance) {
+    public MemberDto(int id, String user_id, String name, int balance, int isadmin) {
         this.id = id;
         this.user_id = user_id;
-        this.isadmin = isadmin;
         this.name = name;
         this.balance = balance;
+        this.isadmin = isadmin;
     }
 
-    public MemberDto(String user_id, int isadmin, String name, int balance) {
+    public MemberDto(String user_id, String name, int balance, int isadmin) {
         id = 0;
         this.user_id = user_id;
-        this.isadmin = isadmin;
         this.name = name;
         this.balance = balance;
+        this.isadmin = isadmin;
     }
 
     public MemberDto() {}
