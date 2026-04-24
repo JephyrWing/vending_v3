@@ -21,11 +21,16 @@ public class UserView {
         this.salesServ = salesServ;
     }
 
-    public static void menu() {
+    public static void menu(int id) {
     }
 
     public int start() {
-        return 0;
+        utilities.creLine();
+        System.out.println("자판기에 오신 걸 환영합니다");
+        utilities.creLine();
+        System.out.println("1. 회원가입\n2. 로그인\n3. 종료\n>");
+        int result = utilities.chooseMenu(3);
+        return result;
     }
 
     public void register() {
@@ -79,7 +84,7 @@ public class UserView {
         memberServ.register(user_id, pass, name, tel, card_num);
     }
 
-    public MemberDto login() {
+    public int[] login() {
         return null;
     }
 }

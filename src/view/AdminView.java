@@ -17,6 +17,6 @@ public class AdminView {
         this.salesServ = salesServ;
     }
 
-    public static void menu() {
+    public static void menu(int id) {
     }
 }
