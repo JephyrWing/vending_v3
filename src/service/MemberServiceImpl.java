@@ -18,8 +18,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public int login(String userId, String pw) {
-        return 0;
+    public MemberDto login(String userId, String pw) {
+        return null;
     }
 
     @Override

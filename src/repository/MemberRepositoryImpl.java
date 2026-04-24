@@ -20,8 +20,8 @@ public class MemberRepositoryImpl implements MemberRepository{
     }
 
     @Override
-    public int login(String userId, String pw) {
-        return 0;
+    public MemberDto login(String userId, String pw) {
+        return null;
     }
 
     @Override
