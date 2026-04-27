@@ -196,7 +196,7 @@ public class VendingState {
                 dto.setMember_id(rs.getInt("member_id"));
                 dto.setMenu_id(rs.getInt("menu_id"));
                 dto.setPrice(rs.getInt("price"));
-                dto.setSold_at(rs.getString("sold_at"));
+                dto.setSoldAt(rs.getString("sold_at"));
                 dtoList.add(dto);
             }
             psmt.close();

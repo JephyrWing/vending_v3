@@ -1,7 +1,10 @@
 package repository;
 
+import state.MemberDto;
 import state.SalesDto;
 import state.VendingState;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class SalesRepositoryImpl implements SalesRepository{
@@ -13,7 +16,14 @@ public class SalesRepositoryImpl implements SalesRepository{
 
     @Override
     public List<SalesDto> findByMember(int memberId) {
-        return List.of();
+        List<SalesDto> list = state.selectSales();
+        List<SalesDto> result = new ArrayList<>();
+        for (SalesDto i : list) {
+            if (i.getMemberId() == memberId) {
+                result.add(i);
+            }
+        }
+        return result;
     }
 
     @Override

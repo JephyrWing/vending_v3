@@ -5,6 +5,7 @@ import service.MemberService;
 import service.SalesService;
 import state.DrinkDto;
 import state.MemberDto;
+import state.SalesDto;
 import utilities.Utilities;
 
 import java.lang.reflect.Member;
@@ -121,8 +122,8 @@ public class UserView {
             switch (ans) {
                 case 1 -> showmenu();
                 case 2 -> purchase(dto);
-                case 3 -> insertCoin(dto.getId());
-                case 4 -> saleshistory();
+                case 3 -> insertCoin(id);
+                case 4 -> saleshistory(id);
                 case 5 -> {
                     System.out.println("로그아웃 합니다.");
                     return;
@@ -172,7 +173,21 @@ public class UserView {
         System.out.println("충전이 완료되었습니다. 잔액은 " + balance + "원 입니다.");
     }
 
-    private void saleshistory() {
+    private void saleshistory(int userid) {
         System.out.println("구매 내역");
+        List<SalesDto> list = salesServ.getByMember(userid);
+        int total = 0;
+        if (list.isEmpty()) {
+            System.out.println("구매내역이 존재하지 않습니다.");
+        } else {
+            System.out.println("구매일시\t\t\t\t\t\t\t| 제품명\t\t|  금액");
+            System.out.println("-----------------------------------------------");
+            for (SalesDto s : list) {
+                System.out.println(String.format("%s\t\t\t\t| %s\t\t\t|  %d원", s.getSoldAt(), s.getMenuId(), s.getPrice()));
+                total += s.getPrice();
+            }
+            System.out.println("-----------------------------------------------");
+            System.out.println("총 구매 금액: " + total + "원");
+        }
     }
 }

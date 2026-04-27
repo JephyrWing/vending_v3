@@ -16,7 +16,7 @@ public class SalesServiceImpl implements SalesService {
 
     @Override
     public List<SalesDto> getByMember(int memberId) {
-        return List.of();
+        return repository.findByMember(memberId);
     }
 
     @Override
