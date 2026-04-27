@@ -1,6 +1,6 @@
 package service;
 
-import dto.DrinkDto;
+import state.DrinkDto;
 import repository.DrinkRepository;
 
 import java.util.List;

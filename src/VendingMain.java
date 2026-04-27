@@ -1,7 +1,8 @@
 import db.DBConnect;
-import dto.MemberDto;
 import repository.*;
 import service.*;
+import state.MemberDto;
+import state.MemberInfoDto;
 import state.VendingState;
 import utilities.Utilities;
 import view.AdminView;

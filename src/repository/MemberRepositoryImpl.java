@@ -1,10 +1,9 @@
 package repository;
 
-import dto.MemberDto;
-import dto.MemberInfoDto;
+import state.MemberDto;
+import state.MemberInfoDto;
 import state.VendingState;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class MemberRepositoryImpl implements MemberRepository{
@@ -20,8 +19,18 @@ public class MemberRepositoryImpl implements MemberRepository{
     }
 
     @Override
-    public MemberDto login(String userId, String pw) {
-        return null;
+    public List<MemberDto> login(String userId, String pw) {
+        return state.login(userId, pw);
+    }
+
+    @Override
+    public List<MemberDto> findById(int id) {
+        return List.of();
+    }
+
+    @Override
+    public List<MemberDto> findByUserId(String userid) {
+        return List.of();
     }
 
     @Override

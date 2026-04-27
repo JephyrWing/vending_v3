@@ -1,4 +1,4 @@
-package dto;
+package state;
 
 public class MemberDto {
     private int id;
@@ -28,6 +28,9 @@ public class MemberDto {
     public int getId() {
         return id;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUserId() {
         return user_id;
@@ -56,4 +59,6 @@ public class MemberDto {
     public void addBalance(int money) {
         balance += money;
     }
+
+
 }
