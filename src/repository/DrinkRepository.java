@@ -13,5 +13,6 @@ public interface DrinkRepository {
 
     List<DrinkDto> findAll();                 // 전체 조회
 
-    int sell(int memberId, int menuId);
+    List<DrinkDto> findById(int id);
+
 }

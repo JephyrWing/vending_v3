@@ -61,7 +61,7 @@ public class SalesDto {
         return sold_at;
     }
 
-    public void setSold_at(String sold_at) {
+    public void setSoldAt(String sold_at) {
         this.sold_at = sold_at;
     }
 

@@ -41,6 +41,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public List<MemberDto> getById(int id) {
+        return repository.findById(id);
+    }
+
+    @Override
     public int update(String userid, String password, String name, String tel, String cardnum) {
         return 0;
     }
@@ -52,7 +57,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int charge(int memberId, int amount) {
-        return 0;
+        MemberDto dto = getById(memberId).get(0);
+        dto.addBalance(amount);
+        repository.charge(dto);
+        return dto.getBalance();
     }
 
     @Override

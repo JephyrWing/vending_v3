@@ -1,8 +1,10 @@
 package repository;
 
 import state.DrinkDto;
+import state.MemberDto;
 import state.VendingState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DrinkRepositoryImpl implements DrinkRepository{
@@ -19,7 +21,7 @@ public class DrinkRepositoryImpl implements DrinkRepository{
 
     @Override
     public int update(DrinkDto dto) {
-        return 0;
+        return state.updateData(dto);
     }
 
     @Override
@@ -29,11 +31,19 @@ public class DrinkRepositoryImpl implements DrinkRepository{
 
     @Override
     public List<DrinkDto> findAll() {
-        return List.of();
+        return state.selectVendingMenu();
     }
 
     @Override
-    public int sell(int memberId, int menuId) {
-        return 0;
+    public List<DrinkDto> findById(int id) {
+        List<DrinkDto> list = state.selectVendingMenu();
+        List<DrinkDto> result = new ArrayList<>();
+        for (DrinkDto i : list) {
+            if (i.getId() == id) {
+                result.add(i);
+            }
+        }
+        return result;
     }
+
 }

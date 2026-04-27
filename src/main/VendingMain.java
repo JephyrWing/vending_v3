@@ -1,22 +1,20 @@
+package main;
+
 import db.DBConnect;
 import repository.*;
 import service.*;
-import state.MemberDto;
-import state.MemberInfoDto;
 import state.VendingState;
 import utilities.Utilities;
 import view.AdminView;
 import view.UserView;
 
 import java.sql.Connection;
-import java.util.List;
 import java.util.Scanner;
 
 public class VendingMain {
-    public static Utilities utilities = new Utilities();
-
     public static void main(String[] args) {
         Connection conn = DBConnect.getConnection();
+        Utilities utilities = new Utilities();
         Scanner sc = new Scanner(System.in);
         VendingState state = new VendingState(conn);
         DrinkRepository drinkRepo = new DrinkRepositoryImpl(state);
@@ -47,12 +45,12 @@ public class VendingMain {
                         if (ans2 == 1) {
                             AdminView.menu(loginResult[0]);
                         } else {
-                            UserView.menu(loginResult[0]);
+                            userView.menu(loginResult[0]);
                         }
                     } else if (loginResult[0] == 0) {
                         System.out.println("Id 혹은 비밀번호가 존재하지 않거나 틀렸습니다.");
                     } else {
-                        UserView.menu(loginResult[0]);
+                        userView.menu(loginResult[0]);
                     }
                 }
                 case 3 -> {

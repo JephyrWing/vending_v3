@@ -1,6 +1,8 @@
 package utilities;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Utilities {
@@ -14,6 +16,31 @@ public class Utilities {
                 menunum = sc.nextInt();
                 if (menunum > count || menunum <= 0) {
                     System.out.println("올바른 번호를 골라주세요.");
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("잘못된 입력입니다. 숫자만 입력해주세요.");
+            }
+        }
+        return menunum;
+    }
+
+    public int chooseMenu(int[] boundary) {
+        int menunum = 0;
+        while (true) {
+            try {
+                System.out.println("\n번호를 골라주세요.");
+                menunum = sc.nextInt();
+                int count = 0;
+                for (int i : boundary) {
+                    if (i == menunum) {
+                        count = 1;
+                        break;
+                    }
+                }
+                if (count == 0) {
+                    System.out.println("존재하지 않는 번호입니다.");
                 } else {
                     break;
                 }

@@ -3,8 +3,13 @@ package view;
 import service.DrinkService;
 import service.MemberService;
 import service.SalesService;
+import state.DrinkDto;
+import state.MemberDto;
+import state.SalesDto;
 import utilities.Utilities;
 
+import java.lang.reflect.Member;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserView {
@@ -18,9 +23,6 @@ public class UserView {
         this.drinkServ = drinkServ;
         this.memberServ = memberServ;
         this.salesServ = salesServ;
-    }
-
-    public static void menu(int id) {
     }
 
     public int start() {
@@ -97,5 +99,95 @@ public class UserView {
         System.out.println("비밀번호를 입력해주세요.");
         String pass = sc.next();
         return memberServ.login(user_id, pass);
+    }
+
+    public void menu(int id) {
+        List<MemberDto> list;
+        MemberDto dto;
+        while (true) {
+            list = memberServ.getById(id);
+            dto = list.get(0);
+            utilities.creLine();
+            System.out.println("안녕하세요, [" + dto.getName() + "]님!\t잔액: [" + dto.getBalance() + "]원");
+            utilities.creLine();
+            System.out.println("""
+                1. 메뉴보기
+                2. 음료 구매
+                3. 금액 충전
+                4. 구매 내역
+                5. 로그아웃
+                >
+                """);
+            int ans = utilities.chooseMenu(5);
+            switch (ans) {
+                case 1 -> showmenu();
+                case 2 -> purchase(dto);
+                case 3 -> insertCoin(id);
+                case 4 -> saleshistory(id);
+                case 5 -> {
+                    System.out.println("로그아웃 합니다.");
+                    return;
+                }
+            }
+        }
+    }
+
+    public void showmenu() {
+        List<DrinkDto> list = drinkServ.getAll();
+        System.out.println("ID\t| 제품명\t\t|  가격\t\t|  재고");
+        System.out.println("----------------------------------");
+        list.forEach(x-> {
+            if (x.getStock() == 0) {
+                System.out.println(String.format("%d\t| %s\t\t|  %d원\t|  %d개 (품절)", x.getId(), x.getName(), x.getPrice(), x.getStock()));
+            } else {
+                System.out.println(String.format("%d\t| %s\t\t|  %d원\t|  %d개", x.getId(), x.getName(), x.getPrice(), x.getStock()));
+            }
+        });
+    }
+
+    private void purchase(MemberDto dto) {
+        List<DrinkDto> list = drinkServ.getAll();
+        showmenu();
+        int ans = utilities.chooseMenu(drinkServ.getIds());
+        DrinkDto selected = drinkServ.getById(ans);
+        if (selected.getStock() == 0) {
+            System.out.println("재고가 없습니다.");
+        } else if (dto.getBalance() < selected.getPrice()) {
+            System.out.println("잔액이 부족합니다.");
+        } else {
+            int result = salesServ.sell(dto.getId(), ans, selected.getPrice());
+            if (result == 0) {
+                System.out.println("구매에 실패하였습니다.");
+            } else {
+                System.out.println(selected.getName() + "이(가) 구매되었습니다!");
+                drinkServ.update(selected.getId(), selected.getName(), selected.getPrice(), selected.getStock() - 1);
+                int balance = memberServ.charge(dto.getId(), -selected.getPrice());
+                System.out.println("잔액은 " + balance + "원 입니다.");
+            }
+        }
+    }
+
+    private void insertCoin(int id) {
+        int tempcoin = utilities.insertCoin();
+        int balance = memberServ.charge(id, tempcoin);
+        System.out.println("충전이 완료되었습니다. 잔액은 " + balance + "원 입니다.");
+    }
+
+    private void saleshistory(int userid) {
+        System.out.println("구매 내역");
+        List<SalesDto> list = salesServ.getByMember(userid);
+        int total = 0;
+        if (list.isEmpty()) {
+            System.out.println("구매내역이 존재하지 않습니다.");
+        } else {
+            System.out.println("구매일시\t\t\t\t\t\t\t| 제품명\t\t|  금액");
+            System.out.println("-----------------------------------------------");
+            for (SalesDto s : list) {
+                System.out.println(String.format("%s\t\t\t\t| %s\t\t\t|  %d원", s.getSoldAt(), s.getMenuId(), s.getPrice()));
+                total += s.getPrice();
+            }
+            System.out.println("-----------------------------------------------");
+            System.out.println("총 구매 금액: " + total + "원");
+        }
     }
 }
