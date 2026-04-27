@@ -80,6 +80,10 @@ public class MemberInfoDto {
     }
 
 
+    protected String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -88,23 +92,18 @@ public class MemberInfoDto {
     public String getTel() {
         return tel;
     }
-
     public void setTel(String tel) {
         this.tel = tel;
     }
 
 
+    protected String getCard_num() {
+        return card_num;
+    }
     public void setCardNum(String card_num) {
         this.card_num = card_num;
     }
 
-    protected boolean passCompare(String pass) {
-        boolean result = false;
-        if (pass.equals(this.password)) {
-            result = true;
-        }
-        return result;
-    }
 
     @Override
     public String toString() {

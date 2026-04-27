@@ -9,6 +9,7 @@ import view.AdminView;
 import view.UserView;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.Scanner;
 
 public class VendingMain {
@@ -35,7 +36,9 @@ public class VendingMain {
         while (true) {
             ans = userView.start();
             switch (ans) {
-                case 1 -> userView.register();
+                case 1 -> {
+                    userView.register();
+                }
                 case 2 -> {
                     loginResult = userView.login();
                     if (loginResult[1] == 1) {

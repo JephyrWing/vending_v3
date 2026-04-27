@@ -15,7 +15,8 @@ public class MemberRepositoryImpl implements MemberRepository{
 
     @Override
     public int register(MemberInfoDto dto) {
-        return 0;
+        int result = state.insertData(dto);
+        return result;
     }
 
     @Override
@@ -35,7 +36,8 @@ public class MemberRepositoryImpl implements MemberRepository{
 
     @Override
     public List<MemberDto> findAll() {
-        return List.of();
+        List<MemberDto> result = state.selectMember();
+        return result;
     }
 
     @Override
