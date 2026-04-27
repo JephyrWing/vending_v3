@@ -58,6 +58,8 @@ public class Utilities {
 
     public boolean Luhn_Validation(String cardnum) {
         int total = 0;
+        boolean result = false;
+
         for (int i = 0; i < cardnum.length(); i += 2) {
             int j = Integer.parseInt(Character.toString(cardnum.charAt(i)));
             if (j * 2 > 9) {
@@ -66,12 +68,9 @@ public class Utilities {
                 total += j;
             }
         }
-
-        boolean result = false;
         if (total % 10 == 0) {
             result = true;
         }
-
         return result;
     }
 }

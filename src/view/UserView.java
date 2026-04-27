@@ -56,10 +56,13 @@ public class UserView {
             if (memberServ.checkPass(pass, passConfirm)) {
                 System.out.println("비밀번호가 설정되었습니다.");
                 break;
+            } else {
+                System.out.println("비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
             }
         }
         System.out.println("이름을 입력해주세요.");
         String name = sc.next();
+
         String tel = "";
         while (true) {
             System.out.println("전화번호를 입력해주세요 (XXX-XXXX-XXXX의 양식으로 입력)");
@@ -80,7 +83,12 @@ public class UserView {
                 break;
             }
         }
-        memberServ.register(user_id, pass, name, tel, card_num);
+        int result = memberServ.register(user_id, pass, name, tel, card_num);
+        if (result == 0) {
+            System.out.println("회원가입에 실패하였습니다.");
+        } else {
+            System.out.println("회원가입 되셨습니다!");
+        }
     }
 
     public int[] login() {

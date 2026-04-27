@@ -12,6 +12,7 @@ public class VendingState {
     String salesInsert = "INSERT INTO sales(member_id, menu_id, price, sold_at) VALUES (?,?,?,?)";
     String memberInsert = "INSERT INTO member(user_id, name, balance, is_admin) VALUES (?,?,?,?)";
     String drinkInsert = "INSERT INTO vending_menu(name, price, stock) VALUES (?,?,?)";
+    String memberinfoInsert = "INSERT INTO member(user_id, password, name, tel, balance, card_num, is_admin) VALUES (?,?,?,?,?,?,?)";
 
     public VendingState(Connection conn) {
         this.conn = conn;
@@ -28,7 +29,6 @@ public class VendingState {
 
         return psmt;
     }
-
     public PreparedStatement psmtmaker(MemberDto dto, String sql) throws Exception {
         PreparedStatement psmt = null;
         psmt = conn.prepareStatement(sql);
@@ -39,7 +39,19 @@ public class VendingState {
 
         return psmt;
     }
+    public PreparedStatement psmtmaker(MemberInfoDto dto, String sql) throws Exception {
+        PreparedStatement psmt = null;
+        psmt = conn.prepareStatement(sql);
+        psmt.setString(1, dto.getUserId());
+        psmt.setString(2, dto.getPassword());
+        psmt.setString(3, dto.getName());
+        psmt.setString(4, dto.getTel());
+        psmt.setInt(5, dto.getBalance());
+        psmt.setString(6, dto.getCard_num());
+        psmt.setInt(7, dto.getIsAdmin());
 
+        return psmt;
+    }
     public PreparedStatement psmtmaker(SalesDto dto, String sql) throws Exception {
         PreparedStatement psmt = null;
         psmt = conn.prepareStatement(sql);
@@ -62,7 +74,6 @@ public class VendingState {
         };
         return result;
     }
-
     public int insertData(MemberDto dto) {
         int result = 0;
         try {
@@ -74,7 +85,17 @@ public class VendingState {
         };
         return result;
     }
-
+    public int insertData(MemberInfoDto dto) {
+        int result = 0;
+        try {
+            PreparedStatement psmt = psmtmaker(dto, memberinfoInsert);
+            result = psmt.executeUpdate();
+            psmt.close();
+        } catch (Exception e) {
+            System.out.println("INSERT 오류 : " + e.getMessage());
+        };
+        return result;
+    }
     public int insertData(SalesDto dto) {
         int result = 0;
         try {
@@ -154,7 +175,7 @@ public class VendingState {
 
         for (MemberInfoDto i : list) {
             if (i.getUserId().equals(user_id)) {
-                if (i.passCompare(pass)) {
+                if (i.getPassword().equals(pass)) {
                     for (MemberDto j : list2) {
                         if (j.getUserId().equals(user_id)) {
                             dto = j;
