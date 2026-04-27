@@ -3,8 +3,12 @@ package view;
 import service.DrinkService;
 import service.MemberService;
 import service.SalesService;
+import state.DrinkDto;
+import state.MemberDto;
 import utilities.Utilities;
 
+import java.lang.reflect.Member;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserView {
@@ -20,7 +24,55 @@ public class UserView {
         this.salesServ = salesServ;
     }
 
-    public static void menu(int id) {
+    public void menu(int id) {
+        List<MemberDto> list;
+        MemberDto dto;
+        while (true) {
+            list = memberServ.getById(id);
+            dto = list.get(0);
+            utilities.creLine();
+            System.out.println("안녕하세요, [" + dto.getName() + "]님!\t잔액: [" + dto.getBalance() + "]원");
+            utilities.creLine();
+            System.out.println("""
+                1. 메뉴보기
+                2. 음료 구매
+                3. 금액 충전
+                4. 구매 내역
+                5. 로그아웃
+                >
+                """);
+            int ans = utilities.chooseMenu(5);
+            switch (ans) {
+                case 1 -> showmenu();
+                case 2 -> purchase();
+                case 3 -> insertCoin();
+                case 4 -> saleshistory();
+                case 5 -> {
+                    System.out.println("로그아웃 합니다.");
+                    return;
+                }
+            }
+        }
+    }
+
+    private void saleshistory() {
+        System.out.println("구매 내역");
+    }
+
+    private void insertCoin() {
+        System.out.println("금액 충전");
+    }
+
+    private void purchase() {
+        System.out.println("음료 구매");
+    }
+
+    public void showmenu() {
+        List<DrinkDto> list = drinkServ.getAll();
+        System.out.println("ID\t| 제품명\t\t|  가격\t\t|  재고");
+        System.out.println("----------------------------------");
+
+        list.forEach(x-> System.out.println(String.format("%d\t| %s\t\t|  %d\t\t|  %d", x.getId(), x.getName(), x.getPrice(), x.getStock())));
     }
 
     public int start() {

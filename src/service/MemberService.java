@@ -10,7 +10,9 @@ public interface MemberService {
 
     int[] login(String userId, String pw); // 로그인 (null 이면 실패)
 
-    List<MemberDto> getAll();                // 전체 회원 조회
+    List<MemberDto> getAll();               // 전체 회원 조회
+
+    List<MemberDto> getById(int id);
 
     int update(String userid, String password, String name, String tel, String cardnum);               // 회원 수정
 

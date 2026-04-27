@@ -4,6 +4,7 @@ import state.MemberDto;
 import state.MemberInfoDto;
 import state.VendingState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MemberRepositoryImpl implements MemberRepository{
@@ -26,12 +27,26 @@ public class MemberRepositoryImpl implements MemberRepository{
 
     @Override
     public List<MemberDto> findById(int id) {
-        return List.of();
+        List<MemberDto> list = state.selectMember();
+        List<MemberDto> result = new ArrayList<>();
+        for (MemberDto i : list) {
+            if (i.getId() == id) {
+                result.add(i);
+            }
+        }
+        return result;
     }
 
     @Override
     public List<MemberDto> findByUserId(String userid) {
-        return List.of();
+        List<MemberDto> list = state.selectMember();
+        List<MemberDto> result = new ArrayList<>();
+        for (MemberDto i : list) {
+            if (i.getUserId().equals(userid)) {
+                result.add(i);
+            }
+        }
+        return result;
     }
 
     @Override

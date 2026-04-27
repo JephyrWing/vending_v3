@@ -41,6 +41,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public List<MemberDto> getById(int id) {
+        return repository.findById(id);
+    }
+
+    @Override
     public int update(String userid, String password, String name, String tel, String cardnum) {
         return 0;
     }
