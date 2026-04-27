@@ -29,7 +29,7 @@ public class DrinkRepositoryImpl implements DrinkRepository{
 
     @Override
     public List<DrinkDto> findAll() {
-        return List.of();
+        return state.selectVendingMenu();
     }
 
     @Override

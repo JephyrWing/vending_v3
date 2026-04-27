@@ -29,7 +29,7 @@ public class DrinkServiceImpl implements DrinkService {
 
     @Override
     public List<DrinkDto> getAll() {
-        return List.of();
+        return repository.findAll();
     }
 
     @Override

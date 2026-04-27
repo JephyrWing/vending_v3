@@ -166,6 +166,61 @@ public class VendingState {
         }
         return dtoList;
     }
+    public List<DrinkDto> selectVendingMenu() {
+        List<DrinkDto> dtoList = new ArrayList<>();
+        // 쿼리 실행 도구
+        PreparedStatement psmt = null;
+        // 검색 결과 레코드 셋을 담을 통
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT * FROM vending_menu";
+            psmt = conn.prepareStatement(sql);
+            // 실행 0> 결과는 rs가 받는다
+            rs = psmt.executeQuery();
+            // 받은 결과를 DTO list에 차곡차곡 담는다.
+            while (rs.next()) {
+                DrinkDto dto = new DrinkDto();
+                dto.setId(rs.getInt("id"));
+                dto.setName(rs.getString("name"));
+                dto.setPrice(rs.getInt("price"));
+                dto.setStock(rs.getInt("stock"));
+                dtoList.add(dto);
+            }
+            psmt.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("Find All Error : " + e.getMessage());
+        }
+        return dtoList;
+    }
+    public List<SalesDto> selectSales() {
+        List<SalesDto> dtoList = new ArrayList<>();
+        // 쿼리 실행 도구
+        PreparedStatement psmt = null;
+        // 검색 결과 레코드 셋을 담을 통
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT * FROM sales";
+            psmt = conn.prepareStatement(sql);
+            // 실행 0> 결과는 rs가 받는다
+            rs = psmt.executeQuery();
+            // 받은 결과를 DTO list에 차곡차곡 담는다.
+            while (rs.next()) {
+                SalesDto dto = new SalesDto();
+                dto.setId(rs.getInt("id"));
+                dto.setMember_id(rs.getInt("member_id"));
+                dto.setMenu_id(rs.getInt("menu_id"));
+                dto.setPrice(rs.getInt("price"));
+                dto.setSold_at(rs.getString("sold_at"));
+                dtoList.add(dto);
+            }
+            psmt.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("Find All Error : " + e.getMessage());
+        }
+        return dtoList;
+    }
 
     public List<MemberDto> login(String user_id, String pass) {
         List<MemberInfoDto> list = selectMemberInfo();
@@ -189,4 +244,6 @@ public class VendingState {
         }
         return result;
     }
+
+
 }

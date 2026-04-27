@@ -71,8 +71,13 @@ public class UserView {
         List<DrinkDto> list = drinkServ.getAll();
         System.out.println("ID\t| 제품명\t\t|  가격\t\t|  재고");
         System.out.println("----------------------------------");
-
-        list.forEach(x-> System.out.println(String.format("%d\t| %s\t\t|  %d\t\t|  %d", x.getId(), x.getName(), x.getPrice(), x.getStock())));
+        list.forEach(x-> {
+            if (x.getStock() == 0) {
+                System.out.println(String.format("%d\t| %s\t\t|  %d원\t|  %d개 (품절)", x.getId(), x.getName(), x.getPrice(), x.getStock()));
+            } else {
+                System.out.println(String.format("%d\t| %s\t\t|  %d원\t|  %d개", x.getId(), x.getName(), x.getPrice(), x.getStock()));
+            }
+        });
     }
 
     public int start() {
