@@ -100,10 +100,24 @@ public class MemberInfoDto {
 
     protected boolean passCompare(String pass) {
         boolean result = false;
-        if (pass == password) {
+        if (pass.equals(this.password)) {
             result = true;
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberInfoDto{" +
+                "id=" + id +
+                ", user_id='" + user_id + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", tel='" + tel + '\'' +
+                ", balance=" + balance +
+                ", card_num='" + card_num + '\'' +
+                ", isadmin=" + isadmin +
+                '}';
     }
 }
 

@@ -150,17 +150,15 @@ public class VendingState {
         List<MemberInfoDto> list = selectMemberInfo();
         List<MemberDto> list2 = selectMember();
         List<MemberDto> result = new ArrayList<>();
-        MemberInfoDto dto;
-        MemberDto dto2;
+        MemberDto dto;
 
         for (MemberInfoDto i : list) {
-            if (i.getUserId() == user_id) {
-                dto = i;
-                if (dto.passCompare(pass)) {
+            if (i.getUserId().equals(user_id)) {
+                if (i.passCompare(pass)) {
                     for (MemberDto j : list2) {
-                        if (i.getUserId() == user_id) {
-                            dto2 = j;
-                            result.add(dto2);
+                        if (j.getUserId().equals(user_id)) {
+                            dto = j;
+                            result.add(dto);
                             break;
                         }
                     }

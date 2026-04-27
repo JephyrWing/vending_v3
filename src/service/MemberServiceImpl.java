@@ -22,9 +22,10 @@ public class MemberServiceImpl implements MemberService {
         int[] result = null;
         List<MemberDto> list = repository.login(userId, pw);
         if (!list.isEmpty()) {
-            result = new int[] {list.get(0).getId(), list.get(0).getIsAdmin()};
+            result = new int[]{list.get(0).getId(), list.get(0).getIsAdmin()};
+        } else {
+            result = new int[]{0, 0};
         }
-
         return result;
     }
 

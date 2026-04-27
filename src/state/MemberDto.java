@@ -59,4 +59,6 @@ public class MemberDto {
     public void addBalance(int money) {
         balance += money;
     }
+
+
 }
