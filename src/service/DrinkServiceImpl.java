@@ -18,8 +18,9 @@ public class DrinkServiceImpl implements DrinkService {
     }
 
     @Override
-    public int update(String name, int price, int stock) {
-        return 0;
+    public int update(int id, String name, int price, int stock) {
+        DrinkDto dto = new DrinkDto(id, name, price, stock);
+        return repository.update(dto);
     }
 
     @Override
@@ -33,7 +34,21 @@ public class DrinkServiceImpl implements DrinkService {
     }
 
     @Override
-    public int sell(int memberId, int menuId) {
-        return 0;
+    public DrinkDto getById(int id) {
+        DrinkDto result = null;
+        List<DrinkDto> list = repository.findById(id);
+        result = list.get(0);
+
+        return result;
+    }
+
+    @Override
+    public int[] getIds() {
+        List<DrinkDto> list = getAll();
+        int[] result = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            result[i] = list.get(i).getId();
+        }
+        return result;
     }
 }

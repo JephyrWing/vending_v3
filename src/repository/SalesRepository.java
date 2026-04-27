@@ -8,4 +8,5 @@ public interface SalesRepository {
     List<SalesDto> findByMember(int memberId);
     List<SalesDto> findSummaryByMenu();
     List<SalesDto> findSummaryByMember();
+    int sell(SalesDto dto);
 }

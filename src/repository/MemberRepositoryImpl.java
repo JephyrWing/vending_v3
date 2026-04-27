@@ -66,7 +66,7 @@ public class MemberRepositoryImpl implements MemberRepository{
     }
 
     @Override
-    public int charge(int memberId, int amount) {
-        return 0;
+    public int charge(MemberDto dto) {
+        return state.updateData(dto);
     }
 }

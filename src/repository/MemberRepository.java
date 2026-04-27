@@ -21,5 +21,5 @@ public interface MemberRepository {
 
     int delete(int id);
 
-    int charge(int memberId, int amount);
+    int charge(MemberDto dto);
 }

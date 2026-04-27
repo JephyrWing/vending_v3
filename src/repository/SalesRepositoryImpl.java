@@ -25,4 +25,10 @@ public class SalesRepositoryImpl implements SalesRepository{
     public List<SalesDto> findSummaryByMember() {
         return List.of();
     }
+
+    @Override
+    public int sell(SalesDto dto) {
+        int result = state.insertData(dto);
+        return result;
+    }
 }

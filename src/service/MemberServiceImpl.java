@@ -57,7 +57,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int charge(int memberId, int amount) {
-        return 0;
+        MemberDto dto = getById(memberId).get(0);
+        dto.addBalance(amount);
+        repository.charge(dto);
+        return dto.getBalance();
     }
 
     @Override
