@@ -103,6 +103,7 @@ public class UserView {
     public void menu(int id) {
         List<MemberDto> list;
         MemberDto dto;
+        int ans = 0;
         while (true) {
             list = memberServ.getById(id);
             dto = list.get(0);
@@ -117,7 +118,7 @@ public class UserView {
                 5. 로그아웃
                 >
                 """);
-            int ans = utilities.chooseMenu(5);
+            ans = utilities.chooseMenu(5);
             switch (ans) {
                 case 1 -> showmenu();
                 case 2 -> purchase(dto);

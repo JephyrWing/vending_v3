@@ -43,7 +43,7 @@ public class VendingMain {
                         System.out.println("관리자 모드로 진입하시겠습니까? 1.네 2.아니오");
                         ans2 = utilities.chooseMenu(2);
                         if (ans2 == 1) {
-                            AdminView.menu(loginResult[0]);
+                            adminView.menu(loginResult[0]);
                         } else {
                             userView.menu(loginResult[0]);
                         }
