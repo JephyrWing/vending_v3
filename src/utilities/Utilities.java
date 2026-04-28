@@ -12,7 +12,7 @@ public class Utilities {
         int menunum = 0;
         while (true) {
             try {
-                System.out.println("\n번호를 골라주세요.");
+                System.out.println("번호를 골라주세요.");
                 menunum = sc.nextInt();
                 if (menunum > count || menunum <= 0) {
                     System.out.println("올바른 번호를 골라주세요.");

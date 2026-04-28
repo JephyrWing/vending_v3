@@ -20,6 +20,29 @@ public class VendingState {
     String drinkDelete = "DELETE FROM vending_menu WHERE id = ?";
     String memberDelete = "DELETE FROM member WHERE id = ?";
 
+    String summaryByMenu = """
+            SELECT
+            d.name 제품명,
+            COUNT(*) 판매수량,
+            SUM(s.price) 판매금액
+            FROM sales s
+            JOIN vending_menu d
+            ON d.id = s.menu_id
+            GROUP BY d.id
+            """;
+
+    String summaryByMember = """
+            SELECT
+            m.user_id 아이디,
+            m.name 회원명,
+            SUM(s.price) 구매금액,
+            m.balance 충전잔액
+            FROM sales s
+            JOIN member m
+            ON m.id = s.member_id
+            GROUP BY m.id
+            """;
+
     public VendingState(Connection conn) {
         this.conn = conn;
     }
@@ -272,6 +295,52 @@ public class VendingState {
             System.out.println("DELETE 오류 : " + e.getMessage());
         };
         return result;
+    }
+
+    public List<DrinkDto> selectSalesSummaryByMenu() {
+        List<DrinkDto> dtoList = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+        try {
+            String sql = summaryByMenu;
+            psmt = conn.prepareStatement(sql);
+            rs = psmt.executeQuery();
+            while (rs.next()) {
+                DrinkDto dto = new DrinkDto();
+                dto.setName(rs.getString("제품명"));
+                dto.setStock(rs.getInt("판매수량"));
+                dto.setPrice(rs.getInt("판매금액"));
+                dtoList.add(dto);
+            }
+            psmt.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("SELECT Error : " + e.getMessage());
+        }
+        return dtoList;
+    }
+    public List<SummaryDto> selectSalesSummaryByMember() {
+        List<SummaryDto> dtoList = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+        try {
+            String sql = summaryByMember;
+            psmt = conn.prepareStatement(sql);
+            rs = psmt.executeQuery();
+            while (rs.next()) {
+                SummaryDto dto = new SummaryDto();
+                dto.setUser_id(rs.getString("아이디"));
+                dto.setName(rs.getString("회원명"));
+                dto.setTotalpurchase(rs.getInt("구매금액"));
+                dto.setBalance(rs.getInt("충전잔액"));
+                dtoList.add(dto);
+            }
+            psmt.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("SELECT Error : " + e.getMessage());
+        }
+        return dtoList;
     }
 
     public List<MemberDto> login(String user_id, String pass) {
