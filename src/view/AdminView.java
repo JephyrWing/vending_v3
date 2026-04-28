@@ -6,6 +6,7 @@ import service.SalesService;
 import state.DrinkDto;
 import state.MemberDto;
 import state.MemberInfoDto;
+import state.SummaryDto;
 import utilities.Utilities;
 
 import java.util.List;
@@ -377,5 +378,27 @@ public class AdminView {
                 1. 제품별 판매 현황
                 2. 회원별 판매 현황
                 """);
+        int ans = utilities.chooseMenu(2);
+        switch (ans) {
+            case 1 -> {
+                System.out.println("제품별 판매 현황");
+                System.out.println("  제품명\t\t판매수량\t\t판매금액");
+                List<DrinkDto> list = salesServ.getSummaryByMenu();
+                System.out.println("  -------------------------------");
+                for (DrinkDto x : list) {
+                    System.out.println(String.format("%5s\t\t%4d개\t   %6d원", x.getName(), x.getStock(), x.getPrice()));
+                }
+                System.out.println("  -------------------------------");
+            }
+            case 2 -> {
+                System.out.println("회원별 판매 현황");
+                System.out.println("  아이디 \t회원명\t 구매금액\t충전잔액");
+                System.out.println("  ---------------------------------------");
+                List<SummaryDto> list = salesServ.getSummaryByMember();
+                for (SummaryDto x : list)
+                    System.out.println(String.format("%6s\t%6s\t%6d원\t%6d원", x.getUser_id(), x.getName(), x.getTotalpurchase(), x.getBalance()));
+                System.out.println("  ---------------------------------------");
+            }
+        }
     }
 }

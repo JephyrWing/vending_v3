@@ -1,8 +1,6 @@
 package repository;
 
-import state.MemberDto;
-import state.SalesDto;
-import state.VendingState;
+import state.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +25,20 @@ public class SalesRepositoryImpl implements SalesRepository{
     }
 
     @Override
-    public List<SalesDto> findSummaryByMenu() {
-        return List.of();
+    public List<SalesDto> findAll() {
+        return state.selectSales();
     }
 
     @Override
-    public List<SalesDto> findSummaryByMember() {
-        return List.of();
+    public List<DrinkDto> findSummaryByMenu() {
+        return state.selectSalesSummaryByMenu();
     }
+
+    @Override
+    public List<SummaryDto> findSummaryByMember() {
+        return state.selectSalesSummaryByMember();
+    }
+
 
     @Override
     public int sell(SalesDto dto) {

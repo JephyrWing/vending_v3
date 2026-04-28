@@ -1,7 +1,9 @@
 package service;
 
+import state.DrinkDto;
 import state.SalesDto;
 import repository.SalesRepository;
+import state.SummaryDto;
 import utilities.Utilities;
 
 import java.util.List;
@@ -20,13 +22,13 @@ public class SalesServiceImpl implements SalesService {
     }
 
     @Override
-    public List<SalesDto> getSummaryByMenu() {
-        return List.of();
+    public List<DrinkDto> getSummaryByMenu() {
+        return repository.findSummaryByMenu();
     }
 
     @Override
-    public List<SalesDto> getSummaryByMember() {
-        return List.of();
+    public List<SummaryDto> getSummaryByMember() {
+        return repository.findSummaryByMember();
     }
 
     @Override
