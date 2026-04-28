@@ -22,4 +22,6 @@ public interface MemberRepository {
     int delete(int id);
 
     int charge(MemberDto dto);
+
+    List<MemberInfoDto> findInfoById(int id);
 }

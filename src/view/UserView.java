@@ -52,7 +52,7 @@ public class UserView {
         while (true) {
             System.out.println("사용하실 비밀번호를 입력해주세요.");
             pass = sc.next();
-            System.out.println("사용하실 비밀번호를 입력해주세요.");
+            System.out.println("비밀번호를 다시 입력해주세요.");
             passConfirm = sc.next();
             if (memberServ.checkPass(pass, passConfirm)) {
                 System.out.println("비밀번호가 설정되었습니다.");

@@ -1,6 +1,7 @@
 package service;
 
 import state.MemberDto;
+import state.MemberInfoDto;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface MemberService {
 
     List<MemberDto> getById(int id);
 
-    int update(String userid, String password, String name, String tel, String cardnum);               // 회원 수정
+    int update(int id, String password, String name, String tel, int balance, String card_num, int isadmin);               // 회원 수정
 
     int delete(int id);                      // 회원 삭제
 
@@ -27,4 +28,8 @@ public interface MemberService {
     boolean checkTel(String tel);
 
     boolean checkCard(String cardNum);
+
+    int[] getIds();
+
+    List<MemberInfoDto> getInfoById(int id);
 }

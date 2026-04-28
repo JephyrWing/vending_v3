@@ -57,16 +57,28 @@ public class MemberRepositoryImpl implements MemberRepository{
 
     @Override
     public int update(MemberInfoDto dto) {
-        return 0;
+        return state.updateData(dto);
     }
 
     @Override
     public int delete(int id) {
-        return 0;
+        return state.deleteMember(id);
     }
 
     @Override
     public int charge(MemberDto dto) {
         return state.updateData(dto);
+    }
+
+    @Override
+    public List<MemberInfoDto> findInfoById(int id) {
+        List<MemberInfoDto> list = state.selectMemberInfo();
+        List<MemberInfoDto> result = new ArrayList<>();
+        for (MemberInfoDto i : list) {
+            if (i.getId() == id) {
+                result.add(i);
+            }
+        }
+        return result;
     }
 }
