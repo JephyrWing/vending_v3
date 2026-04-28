@@ -16,7 +16,7 @@ public class DrinkRepositoryImpl implements DrinkRepository{
 
     @Override
     public int insert(DrinkDto dto) {
-        return 0;
+        return state.insertData(dto);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class DrinkRepositoryImpl implements DrinkRepository{
 
     @Override
     public int delete(int id) {
-        return 0;
+        return state.deleteDrink(id);
     }
 
     @Override

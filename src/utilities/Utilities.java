@@ -30,7 +30,7 @@ public class Utilities {
         int menunum = 0;
         while (true) {
             try {
-                System.out.println("\n번호를 골라주세요.");
+                System.out.println("\n선택하실 음료의 ID를 골라주세요.");
                 menunum = sc.nextInt();
                 int count = 0;
                 for (int i : boundary) {
