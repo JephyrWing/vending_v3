@@ -138,9 +138,9 @@ public class UserView {
         System.out.println("----------------------------------");
         list.forEach(x-> {
             if (x.getStock() == 0) {
-                System.out.println(String.format("%d\t| %s\t\t|  %d원\t|  %d개 (품절)", x.getId(), x.getName(), x.getPrice(), x.getStock()));
+                System.out.println(String.format("%d\t| %-6s\t|  %-5d원\t|  %d개 (품절)", x.getId(), x.getName(), x.getPrice(), x.getStock()));
             } else {
-                System.out.println(String.format("%d\t| %s\t\t|  %d원\t|  %d개", x.getId(), x.getName(), x.getPrice(), x.getStock()));
+                System.out.println(String.format("%d\t| %-6s\t|  %-5d원\t|  %d개", x.getId(), x.getName(), x.getPrice(), x.getStock()));
             }
         });
     }

@@ -14,7 +14,8 @@ public class DrinkServiceImpl implements DrinkService {
 
     @Override
     public int insert(String name, int price, int stock) {
-        return 0;
+        DrinkDto dto = new DrinkDto(name, price, stock);
+        return repository.insert(dto);
     }
 
     @Override
@@ -25,7 +26,7 @@ public class DrinkServiceImpl implements DrinkService {
 
     @Override
     public int delete(int id) {
-        return 0;
+        return repository.delete(id);
     }
 
     @Override

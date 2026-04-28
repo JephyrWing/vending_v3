@@ -10,14 +10,15 @@ import java.util.concurrent.atomic.AtomicReference;
 public class VendingState {
     private final Connection conn;
     String drinkInsert = "INSERT INTO vending_menu(name, price, stock) VALUES (?,?,?)";
-    String memberInsert = "INSERT INTO member(user_id, name, balance, is_admin) VALUES (?,?,?,?)";
     String memberinfoInsert = "INSERT INTO member(user_id, password, name, tel, balance, card_num, is_admin) VALUES (?,?,?,?,?,?,?)";
     String salesInsert = "INSERT INTO sales(member_id, menu_id, price, sold_at) VALUES (?,?,?,?)";
 
     String drinkUpdate = "UPDATE vending_menu SET name = ?, price = ?, stock = ? WHERE id = ?";
     String memberUpdate = "UPDATE member SET user_id = ?, name = ?, balance = ?, is_admin = ? WHERE id = ?";
     String memberInfoUpdate = "UPDATE member SET user_id = ?, password = ?, name = ?, tel = ?, balance = ?, card_num = ?, is_admin = ? WHERE id = ?";
-    String salesUpdate = "UPDATE sales SET member_id = ?, menu_id = ?, price = ?, sold_at = ? WHERE id = ?";
+
+    String drinkDelete = "DELETE FROM vending_menu WHERE id = ?";
+    String memberDelete = "DELETE FROM member WHERE id = ?";
 
     public VendingState(Connection conn) {
         this.conn = conn;
@@ -33,22 +34,6 @@ public class VendingState {
             psmt.setString(1, dto.getName());
             psmt.setInt(2, dto.getPrice());
             psmt.setInt(3, dto.getStock());
-            result = psmt.executeUpdate();
-            psmt.close();
-        } catch (Exception e) {
-            System.out.println("INSERT 오류 : " + e.getMessage());
-        };
-        return result;
-    }
-    public int insertData(MemberDto dto) {
-        int result = 0;
-        try {
-            PreparedStatement psmt = null;
-            psmt = conn.prepareStatement(memberInsert);
-            psmt.setString(1, dto.getUserId());
-            psmt.setString(2, dto.getName());
-            psmt.setInt(3, dto.getBalance());
-            psmt.setInt(4, dto.getIsAdmin());
             result = psmt.executeUpdate();
             psmt.close();
         } catch (Exception e) {
@@ -238,6 +223,33 @@ public class VendingState {
             psmt.close();
         } catch (Exception e) {
             System.out.println("UPDATE 오류 : " + e.getMessage());
+        };
+        return result;
+    }
+
+    public int deleteDrink(int id) {
+        int result = 0;
+        try {
+            PreparedStatement psmt = null;
+            psmt = conn.prepareStatement(drinkDelete);
+            psmt.setInt(1, id);
+            result = psmt.executeUpdate();
+            psmt.close();
+        } catch (Exception e) {
+            System.out.println("DELETE 오류 : " + e.getMessage());
+        };
+        return result;
+    }
+    public int deleteMember(int id) {
+        int result = 0;
+        try {
+            PreparedStatement psmt = null;
+            psmt = conn.prepareStatement(memberDelete);
+            psmt.setInt(1, id);
+            result = psmt.executeUpdate();
+            psmt.close();
+        } catch (Exception e) {
+            System.out.println("DELETE 오류 : " + e.getMessage());
         };
         return result;
     }
