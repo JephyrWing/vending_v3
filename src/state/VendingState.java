@@ -226,6 +226,26 @@ public class VendingState {
         };
         return result;
     }
+    public int updateData(MemberInfoDto dto) {
+        int result = 0;
+        try {
+            PreparedStatement psmt = null;
+            psmt = conn.prepareStatement(memberInfoUpdate);
+            psmt.setString(1, dto.getUserId());
+            psmt.setString(2, dto.getPassword());
+            psmt.setString(3, dto.getName());
+            psmt.setString(4, dto.getTel());
+            psmt.setInt(5, dto.getBalance());
+            psmt.setString(6, dto.getCard_num());
+            psmt.setInt(7, dto.getIsAdmin());
+            psmt.setInt(8, dto.getId());
+            result = psmt.executeUpdate();
+            psmt.close();
+        } catch (Exception e) {
+            System.out.println("UPDATE 오류 : " + e.getMessage());
+        };
+        return result;
+    }
 
     public int deleteDrink(int id) {
         int result = 0;
@@ -276,6 +296,4 @@ public class VendingState {
         }
         return result;
     }
-
-
 }

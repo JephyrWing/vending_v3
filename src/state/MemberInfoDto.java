@@ -107,16 +107,13 @@ public class MemberInfoDto {
 
     @Override
     public String toString() {
-        return "MemberInfoDto{" +
-                "id=" + id +
-                ", user_id='" + user_id + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", tel='" + tel + '\'' +
-                ", balance=" + balance +
-                ", card_num='" + card_num + '\'' +
-                ", isadmin=" + isadmin +
-                '}';
+        return  "ID : " + id +
+                ", USER ID : " + user_id +
+                ", 이름 : " + name +
+                ", 전화번호 : " + tel +
+                ", 잔액 : " + balance +
+                ", 관리자 여부 : " + isadmin
+                ;
     }
 }
 

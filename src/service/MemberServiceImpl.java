@@ -1,5 +1,6 @@
 package service;
 
+import state.DrinkDto;
 import state.MemberDto;
 import repository.MemberRepository;
 import state.MemberInfoDto;
@@ -46,13 +47,24 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public int update(String userid, String password, String name, String tel, String cardnum) {
-        return 0;
+    public int update(int id, String password, String name, String tel, int balance, String card_num, int isadmin) {
+        MemberInfoDto dto = getInfoById(id).get(0);
+        if (!password.equals("변경 없음")) {
+            dto.setPassword(password);
+        }
+        dto.setName(name);
+        dto.setTel(tel);
+        dto.setBalance(balance);
+        if (!card_num.equals("변경 없음")) {
+            dto.setPassword(card_num);
+        }
+        dto.setIsAdmin(isadmin);
+        return repository.update(dto);
     }
 
     @Override
     public int delete(int id) {
-        return 0;
+        return repository.delete(id);
     }
 
     @Override
@@ -104,5 +116,20 @@ public class MemberServiceImpl implements MemberService {
             System.out.println("카드 번호가 유효하지 않습니다.");
         }
         return result;
+    }
+
+    @Override
+    public int[] getIds() {
+        List<MemberDto> list = getAll();
+        int[] result = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            result[i] = list.get(i).getId();
+        }
+        return result;
+    }
+
+    @Override
+    public List<MemberInfoDto> getInfoById(int id) {
+        return repository.findInfoById(id);
     }
 }
