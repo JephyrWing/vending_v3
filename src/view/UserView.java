@@ -8,7 +8,6 @@ import state.MemberDto;
 import state.SalesDto;
 import utilities.Utilities;
 
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Scanner;
 
@@ -183,7 +182,7 @@ public class UserView {
             System.out.println("구매일시\t\t\t\t\t\t\t| 제품명\t\t|  금액");
             System.out.println("-----------------------------------------------");
             for (SalesDto s : list) {
-                System.out.println(String.format("%s\t\t\t\t| %s\t\t\t|  %d원", s.getSoldAt(), s.getMenuId(), s.getPrice()));
+                System.out.println(String.format("%s\t\t\t\t| %s\t\t|  %d원", s.getSoldAt(), drinkServ.getById(s.getMenuId()).getName(), s.getPrice()));
                 total += s.getPrice();
             }
             System.out.println("-----------------------------------------------");
